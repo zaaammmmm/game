@@ -11,14 +11,17 @@ public class LowSanityEffects : MonoBehaviour
 
     void Update()
     {
-        float sanity = SanitySystem.Instance.GetPercent();
+        if (SanitySystem.Instance == null)
+            return;
+
+        float sanity = SanitySystem.Instance.Percent();
 
         if (sanity < 0.35f)
         {
             float power = (1f - sanity) * 0.05f;
 
-            transform.localPosition = startPos +
-                Random.insideUnitSphere * power;
+            transform.localPosition =
+                startPos + Random.insideUnitSphere * power;
         }
         else
         {
